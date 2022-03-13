@@ -20,8 +20,10 @@ public class NewWikiTest extends TestBase{
         DesiredCapabilities caps = new DesiredCapabilities();
 
         // Set your access credentials
-        caps.setCapability("browserstack.user", "");
-        caps.setCapability("browserstack.key", "");
+        //caps.setCapability("browserstack.user", "aleksandradikaya_1vRp9C");
+        //caps.setCapability("browserstack.key", "3g7Bsvx4xV2W8yHFAg8M");
+        caps.setCapability("browserstack.user", config.login());
+        caps.setCapability("browserstack.key", config.password());
 
         // Set URL of the application under test
         caps.setCapability("app", "bs://1c668bd9423578db78a314dcc922b0844cba01d5");

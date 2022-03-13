@@ -1,9 +1,11 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import config.CredentialsConfig;
 import helpers.Attach;
 import drivers.BrowserstackMobileDriver;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +18,9 @@ import static helpers.Browserstack.videoUrl;
 
 
 public class TestBase {
+
+    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
+
 
     @BeforeAll
     public static void setup() {
