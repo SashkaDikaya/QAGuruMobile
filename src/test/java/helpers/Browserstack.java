@@ -1,20 +1,26 @@
 package helpers;
 
-import io.restassured.response.Response;
+import config.CredentialsConfig;
+import org.aeonbits.owner.ConfigFactory;
 
 import static io.restassured.RestAssured.given;
 
 public class Browserstack {
 
     public static String videoUrl(String sessionId) {
-       return given()
-                .auth().basic("aleksandradikaya_1vRp9C", "3g7Bsvx4xV2W8yHFAg8M")
+        CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
+
+        String login = config.login();
+        String password = config.password();
+
+        return given()
+                .auth().basic(login, password)
                 .when()
-                .get("https://api-cloud.browserstack.com/app-automate/sessions/" + sessionId +".json")
+                .get("https://api-cloud.browserstack.com/app-automate/sessions/" + sessionId + ".json")
                 .then()
                 .statusCode(200)
                 .extract()
                 .response()
-               .path("automation_session.video_url");
+                .path("automation_session.video_url");
     }
 }

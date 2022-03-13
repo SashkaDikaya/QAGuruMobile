@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 import static io.qameta.allure.Allure.step;
 
 @Tag("selenide")
-public class AndroidSelenideTest extends TestBase{
+public class AndroidSelenideHomeWorkTest extends TestBase{
 
     @Test
     void searchTest()  {
