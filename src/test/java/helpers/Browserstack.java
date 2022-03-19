@@ -8,11 +8,11 @@ public class Browserstack {
 
     public static String videoUrl(String sessionId) {
 
-        String user = "alexndra_gdqYtz";
-        String key = "mBfYFtmdrgAbFoPhgEfq";
+        String login = Credentials.config.user();
+        String password = Credentials.config.key();
 
         return given()
-                .auth().basic(user, key)
+                .auth().basic(login, password)
                 .when()
                 .get("https://api-cloud.browserstack.com/app-automate/sessions/" + sessionId + ".json")
                 .then()
