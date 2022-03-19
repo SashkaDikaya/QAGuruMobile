@@ -61,6 +61,6 @@ tasks.withType(Test) {
 
 task selenide_android_test(type: Test) {
     useJUnitPlatform {
-        includeTags 'selenide'
+        includeTags 'mobile'
     }
 }
