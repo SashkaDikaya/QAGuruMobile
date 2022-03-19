@@ -1,17 +1,15 @@
 package helpers;
 
-import config.CredentialsConfig;
-import org.aeonbits.owner.ConfigFactory;
+import config.Credentials;
 
 import static io.restassured.RestAssured.given;
 
 public class Browserstack {
 
     public static String videoUrl(String sessionId) {
-        CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
 
-        String login = config.login();
-        String password = config.password();
+        String login = Credentials.config.login();
+        String password = Credentials.config.password();
 
         return given()
                 .auth().basic(login, password)
