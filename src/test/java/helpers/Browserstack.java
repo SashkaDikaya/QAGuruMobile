@@ -8,8 +8,8 @@ public class Browserstack {
 
     public static String videoUrl(String sessionId) {
 
-        String user = Credentials.config.user();
-        String key = Credentials.config.key();
+        String user = "alexndra_gdqYtz";
+        String key = "mBfYFtmdrgAbFoPhgEfq";
 
         return given()
                 .auth().basic(user, key)

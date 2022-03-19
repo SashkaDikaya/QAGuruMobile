@@ -23,9 +23,9 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
     public WebDriver createDriver(DesiredCapabilities caps) {
 
         // Set your access credentials
-        String user = Credentials.config.user();
-        String key = Credentials.config.key();
-        String app = Credentials.config.app();
+        String user = "alexndra_gdqYtz";
+        String key = "mBfYFtmdrgAbFoPhgEfq";
+        String app = "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c";
         caps.setCapability("browserstack.user", user);
         caps.setCapability("browserstack.key", key);
 
