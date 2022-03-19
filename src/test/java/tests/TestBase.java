@@ -25,7 +25,6 @@ public class TestBase {
         Configuration.browser = BrowserstackMobileDriver.class.getName();
         Configuration.startMaximized = false;
         Configuration.browserSize = null;
-
     }
 
     @BeforeEach
@@ -42,6 +41,5 @@ public class TestBase {
 
         closeWebDriver();
         Attach.video(sessionId);
-
     }
 }

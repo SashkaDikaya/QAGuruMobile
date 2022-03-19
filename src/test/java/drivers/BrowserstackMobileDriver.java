@@ -29,7 +29,8 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         caps.setCapability("browserstack.key", password);
 
         // Set URL of the application under test
-        caps.setCapability("app", "bs://1c668bd9423578db78a314dcc922b0844cba01d5");
+        String app = Credentials.config.app();
+        caps.setCapability("app", app);
 
         // Specify device and os_version for testing
         caps.setCapability("device", "Google Pixel 3");
