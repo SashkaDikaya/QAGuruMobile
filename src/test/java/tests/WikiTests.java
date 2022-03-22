@@ -4,27 +4,52 @@ import io.appium.java_client.MobileBy;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 import static io.qameta.allure.Allure.step;
 
 @Tag("wiki_test")
-public class WikiTests extends TestBase{
+public class WikiTests extends TestBase {
 
     @Test
-    void checkScreenTest()  {
-        step("Check first screen", () ->{
-        $(MobileBy.id("org.wikipedia.alpha:id/primaryTextView")).shouldHave(text("Free Encyclopedia"));
-        $(MobileBy.id("org.wikipedia.alpha:id/addLangContainer")).click();
-        $(MobileBy.id("org.wikipedia.alpha:id/wiki_language_title")).click();
-        $x("//android.widget.LinearLayout[3]").click();
-        $x("//android.widget.LinearLayout[3]/android.widget.TextView[1]").click();
+    void checkScreenTest() {
+        step("Check first screen", () -> {
+            $(MobileBy.id("org.wikipedia.alpha:id/primaryTextView")).shouldHave(text("Free Encyclopedia"));
+        });
 
-        $(MobileBy.AccessibilityId("Navigate up")).click();
-        $x("//androidx.recyclerview.widget.RecyclerView").shouldHave(text("Русский"));
+        step("Set russian language", () -> {
+            $(MobileBy.id("org.wikipedia.alpha:id/addLangContainer")).click();
+            $(MobileBy.xpath("//*[@text='ADD LANGUAGE']")).click();
+            $(MobileBy.xpath(("//*[@text='Русский']"))).click();
+            $(MobileBy.xpath(("//*[@content-desc='Navigate up']"))).click();
+        });
 
+        step("Check russian language", () -> {
+            $(MobileBy.xpath(("//*[contains(@text,'Русский')]"))).shouldHave(text("Русский"));
+        });
+
+        step("Go to second screen", () -> {
+            $(MobileBy.xpath(("//*[@text='CONTINUE']"))).click();
+        });
+
+        step("Check second screen", () -> {
+            $(MobileBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Customize the feed to your interests"));
+        });
+
+        step("Go to third screen", () -> {
+            $(MobileBy.xpath(("//*[@text='CONTINUE']"))).click();
+        });
+
+        step("Check third screen", () -> {
+            $(MobileBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Login to your Wikipedia account"));
+        });
+
+        step("Go to fourth screen", () -> {
+            $(MobileBy.xpath(("//*[@text='CONTINUE']"))).click();
+        });
+
+        step("Check fourth screen", () -> {
+            $(MobileBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Learn more"));
 
         });
     }
