@@ -3,6 +3,8 @@ package drivers;
 import com.codeborne.selenide.WebDriverProvider;
 import config.Credentials;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -21,29 +23,31 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
     }
 
     @Override
-    public WebDriver createDriver(DesiredCapabilities caps) {
+    public WebDriver createDriver(Capabilities capabilities) {
+        MutableCapabilities mutableCapabilities = new MutableCapabilities();
+        mutableCapabilities.merge(capabilities);
 
         String user = Credentials.config.user();
         String key = Credentials.config.key();
 
 
         // Set your access credentials
-        caps.setCapability("browserstack.user", user);
-        caps.setCapability("browserstack.key", key);
+        mutableCapabilities.setCapability("browserstack.user", user);
+        mutableCapabilities.setCapability("browserstack.key", key);
 
         // Set URL of the application under test
-        caps.setCapability("app", "bs://b35b748c4f3d0125d09b35c9fe62cbd3049bd23e");
+        mutableCapabilities.setCapability("app", "bs://b35b748c4f3d0125d09b35c9fe62cbd3049bd23e");
 
         // Specify device and os_version for testing
-        caps.setCapability("device", "Google Pixel 3");
-        caps.setCapability("os_version", "9.0");
+        mutableCapabilities.setCapability("device", "Google Pixel 3");
+        mutableCapabilities.setCapability("os_version", "9.0");
 
         // Set other BrowserStack capabilities
-        caps.setCapability("project", "First Java Project");
-        caps.setCapability("build", "browserstack-build-1");
-        caps.setCapability("name", "first_test");
+        mutableCapabilities.setCapability("project", "First Java Project");
+        mutableCapabilities.setCapability("build", "browserstack-build-1");
+        mutableCapabilities.setCapability("name", "first_test");
 
-        return new AndroidDriver(getBrowserstackUrl(), caps);
+        return new AndroidDriver(getBrowserstackUrl(), capabilities);
     }
 
 }
