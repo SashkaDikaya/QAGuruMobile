@@ -14,6 +14,7 @@ import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.Attach.getSessionId;
 
 
+
 public class TestBase {
 
 
@@ -21,12 +22,8 @@ public class TestBase {
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
         Configuration.browser = BrowserstackMobileDriver.class.getName();
-
-       Configuration.browserSize = null;
-
+        Configuration.browserSize = null;
     }
-
-
 
     @BeforeEach
     public void startDriver () {
