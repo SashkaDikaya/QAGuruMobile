@@ -1,18 +1,37 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.Credentials;
-import io.appium.java_client.android.AndroidDriver;
+import config.BrowserstackConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
 
+    @Override
+    public WebDriver createDriver(Capabilities capabilities) {
+
+        MutableCapabilities mutableCapabilities = new MutableCapabilities();
+        mutableCapabilities.merge(capabilities);
+
+        BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class);
+
+        mutableCapabilities.setCapability("browserstack.user", config.user());
+        mutableCapabilities.setCapability("browserstack.key", config.key());
+        mutableCapabilities.setCapability("app", config.app());
+        mutableCapabilities.setCapability("device", "Google Pixel 3");
+        mutableCapabilities.setCapability("os_version", "9.0");
+        mutableCapabilities.setCapability("project", "First Java Project");
+        mutableCapabilities.setCapability("build", "browserstack-build-1");
+        mutableCapabilities.setCapability("name", "first_test");
+
+        return new RemoteWebDriver(getBrowserstackUrl(), mutableCapabilities);
+    }
 
     public static URL getBrowserstackUrl() {
         try {
@@ -22,32 +41,5 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         }
     }
 
-    @Override
-    public WebDriver createDriver(Capabilities capabilities) {
-        MutableCapabilities mutableCapabilities = new MutableCapabilities();
-        mutableCapabilities.merge(capabilities);
-
-        String user = Credentials.config.user();
-        String key = Credentials.config.key();
-
-
-        // Set your access credentials
-        mutableCapabilities.setCapability("browserstack.user", user);
-        mutableCapabilities.setCapability("browserstack.key", key);
-
-        // Set URL of the application under test
-        mutableCapabilities.setCapability("app", "bs://b35b748c4f3d0125d09b35c9fe62cbd3049bd23e");
-
-        // Specify device and os_version for testing
-        mutableCapabilities.setCapability("device", "Google Pixel 3");
-        mutableCapabilities.setCapability("os_version", "9.0");
-
-        // Set other BrowserStack capabilities
-        mutableCapabilities.setCapability("project", "First Java Project");
-        mutableCapabilities.setCapability("build", "browserstack-build-1");
-        mutableCapabilities.setCapability("name", "first_test");
-
-        return new AndroidDriver(getBrowserstackUrl(), capabilities);
-    }
 
 }
