@@ -20,10 +20,26 @@ public class TestBase {
     @BeforeAll
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
-        Configuration.browser = BrowserstackMobileDriver.class.getName();
+       // Configuration.browser = BrowserstackMobileDriver.class.getName();
+
+       // Configuration.browserSize = null;
+
+        String deviceHost = System.getProperty("deviceHost");
+
+        if(deviceHost.equals("browserstack")){
+            Configuration.browser = BrowserstackMobileDriver.class.getName();
+        }
+        /*else if(deviceHost.equals("emulator")){
+            Configuration.browser = LocalMobileDriver.class.getName();
+        }
+        else if(deviceHost.equals("realDevice")){
+            Configuration.browser = RealDeviceDriver.class.getName();
+        }*/
 
         Configuration.browserSize = null;
     }
+
+
 
     @BeforeEach
     public void startDriver () {
