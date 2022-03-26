@@ -17,10 +17,10 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
-
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
         mutableCapabilities.merge(capabilities);
 
+        mutableCapabilities.setCapability("browserstack.appium_version", "1.22.0");
         mutableCapabilities.setCapability("browserstack.user", config.user());
         mutableCapabilities.setCapability("browserstack.key", config.key());
         mutableCapabilities.setCapability("app", config.app());
@@ -33,13 +33,11 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         return new RemoteWebDriver(getBrowserstackUrl(), mutableCapabilities);
     }
 
-    public static URL getBrowserstackUrl() {
+    public static URL getBrowserstackUrl(){
         try {
             return new URL("http://hub.browserstack.com/wd/hub");
-        } catch (MalformedURLException e) {
+        }catch (MalformedURLException e){
             throw new RuntimeException(e);
         }
     }
-
-
 }
