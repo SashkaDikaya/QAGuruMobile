@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.Attach.getSessionId;
-
+import static helpers.RunHelper.runHelper;
 
 
 public class TestBase {
@@ -21,8 +21,10 @@ public class TestBase {
     @BeforeAll
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
-        Configuration.browser = BrowserstackMobileDriver.class.getName();
+
+        Configuration.browser = runHelper().getDriverClass().getName();
         Configuration.browserSize = null;
+
     }
 
     @BeforeEach
