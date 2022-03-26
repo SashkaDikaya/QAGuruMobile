@@ -7,9 +7,9 @@ import static io.restassured.RestAssured.given;
 
 public class Browserstack {
 
-    public static String videoUrl(String sessionId) {
+    static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class);
 
-        BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class);
+    public static String videoUrl(String sessionId) {
 
         return given()
                 .auth().basic(config.user(), config.key())
