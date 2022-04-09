@@ -1,7 +1,6 @@
 package tests;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +13,8 @@ public class WikiTests extends TestBase {
 
     @Test
     void checkScreenTest() {
-        step("Check first screen", () -> {
-            $(AppiumBy.id("org.wikipedia.alpha:id/primaryTextView")).shouldHave(text("Free Encyclopedia"));
-        });
+        step("Check first screen", () ->
+                $(AppiumBy.id("org.wikipedia.alpha:id/primaryTextView")).shouldHave(text("Free Encyclopedia")));
 
         step("Set russian language", () -> {
             $(AppiumBy.id("org.wikipedia.alpha:id/addLangContainer")).click();
@@ -25,34 +23,27 @@ public class WikiTests extends TestBase {
             $(AppiumBy.xpath(("//*[@content-desc='Navigate up']"))).click();
         });
 
-        step("Check russian language", () -> {
-            $(AppiumBy.xpath(("//*[contains(@text,'Русский')]"))).shouldHave(text("Русский"));
-        });
+        step("Check russian language", () ->
+                $(AppiumBy.xpath(("//*[contains(@text,'Русский')]"))).shouldHave(text("Русский")));
 
-        step("Go to second screen", () -> {
-            $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click();
-        });
+        step("Go to second screen", () ->
+                $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click());
 
-        step("Check second screen", () -> {
-            $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Customize the feed to your interests"));
-        });
+        step("Check second screen", () ->
+                $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView"))
+                        .shouldHave(text("Customize the feed to your interests")));
 
-        step("Go to third screen", () -> {
-            $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click();
-        });
+        step("Go to third screen", () ->
+                $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click());
 
-        step("Check third screen", () -> {
-            $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Login to your Wikipedia account"));
-        });
+        step("Check third screen", () ->
+                $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView"))
+                        .shouldHave(text("Login to your Wikipedia account")));
 
-        step("Go to fourth screen", () -> {
-            $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click();
-        });
+        step("Go to fourth screen", () ->
+                $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click());
 
-        step("Check fourth screen", () -> {
-            $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Learn more"));
-
-        });
+        step("Check fourth screen", () ->
+                $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Learn more")));
     }
-
 }
