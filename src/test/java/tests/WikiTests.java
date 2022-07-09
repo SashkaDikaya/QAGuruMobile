@@ -13,6 +13,8 @@ public class WikiTests extends TestBase {
 
     @Test
     void checkScreenTest() {
+
+        /*
         step("Check first screen", () ->
                 $(AppiumBy.id("org.wikipedia.alpha:id/primaryTextView")).shouldHave(text("Free Encyclopedia")));
 
@@ -44,6 +46,6 @@ public class WikiTests extends TestBase {
                 $(AppiumBy.xpath(("//*[@text='CONTINUE']"))).click());
 
         step("Check fourth screen", () ->
-                $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Learn more")));
+                $(AppiumBy.id("org.wikipedia.alpha:id/secondaryTextView")).shouldHave(text("Learn more")));*/
     }
 }
